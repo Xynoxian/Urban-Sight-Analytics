@@ -1,6 +1,6 @@
 # UrbanSight Analytics: Smart City Demographics & Security
 
-> **🏆 Presented at the 17th Student Research Conference on Applied Computing (SRC 2026) at Zayed University.**
+> **🏆 Presented at the 17th Student Research Conference on Applied Computing (SRC 2026) at Zayed University and will be published in IEEE.**
 
 ##  Table of Contents
 - [Overview](#overview)

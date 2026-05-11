@@ -1,6 +1,15 @@
-# UrbanSight Analytics: Smart City Demographics & Security
+<div align="center">
 
-> **🏆 Presented at the 17th Student Research Conference on Applied Computing (SRC 2026) at Zayed University and will be published in IEEE.**
+# 👁️ Multi-Attribute Biometric Profiler
+
+A comprehensive, real-time computer vision dashboard that aggregates heterogeneous deep learning models to generate a holistic biometric profile.
+
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10-orange)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0-red)
+![ONNX](https://img.shields.io/badge/ONNX-Runtime-blueviolet)
+
+</div>
 
 ##  Table of Contents
 - [Overview](#overview)

@@ -1,4 +1,4 @@
-# UrbanSight Analytics: Smart City Demographics & Security 🏙️👁️
+# UrbanSight Analytics: Smart City Demographics & Security
 Co-author: Mahmood Muwafi [@wideindeed](https://github.com/wideindeed)
 
 > **🏆 Presented at the 17th Student Research Conference on Applied Computing (SRC 2026) at Zayed University and will be presented as research paper in IEEE.**

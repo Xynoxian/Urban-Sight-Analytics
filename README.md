@@ -1,29 +1,69 @@
-# UrbanSight Analytics: Smart City Demographics & Security 🏙️👁️
+# UrbanSight Analytics: Smart City Demographics & Security
 
 > **🏆 Presented at the 17th Student Research Conference on Applied Computing (SRC 2026) at Zayed University.**
 
-## Overview
-UrbanSight Analytics is a comprehensive, real-time "AI Profiler" designed for intelligent surveillance and modern Human-Computer Interaction (HCI). Moving beyond traditional biometric systems, this project emphasizes **soft biometrics**—extracting semantic descriptions of subjects in unconstrained environments. 
+##  Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Models Used](#models-used)
+- [License](#license)
 
-The system accurately profiles physical and behavioral traits, addressing the inherent complexities of varying lighting, pose, and occlusion in real-world video feeds.
+##  Overview
+This application solves the challenge of running multiple, resource-intensive AI models simultaneously on a live video feed. By utilizing a hybrid runtime environment, it bypasses version conflicts (e.g., Keras 2 vs Keras 3) and provides a "stabilized" reporting engine that eliminates frame-by-frame prediction jitter.
 
-## Key Features
-* **Facial & Demographic Profiling:** Real-time detection of Age, Gender (via Xception), and Race/Ethnicity.
-* **Physical Attribute Segmentation:** Precise Hair segmentation (using U-Net) and Skin Tone analysis.
-* **Apparel Recognition:** Clothing attribute and color detection using Vision Transformers (ViT) and KNN classifiers.
-* **Optimized Inference:** Utilizes lightweight `.onnx`, `.keras`, and `.safetensors` models for efficient real-time execution.
+It is designed for use cases in **retail analytics**, **demographic profiling**, and **automated security reporting**.
 
-## System Architecture & Models
-This project integrates multiple specialized deep learning architectures:
-* **Face Detection:** OpenCV Haarcascades (`haarcascade_frontalface_default.xml`)
-* **Gender Classification:** Fine-tuned Xception Network
-* **Hair Segmentation:** U-Net
-* **Clothing/Color:** ViT (Vision Transformer) & KNN Classifier
-* **Age & Race:** ONNX-optimized multi-class models
+##  Features
+* **Real-Time Analysis:** Processes live webcam feed to detect faces and clothing items.
+* **Holistic Profiling:** Simultaneously predicts Age, Gender, Ethnicity, Skin Tone, Hair Style, and Clothing.
+* **Hybrid Runtime Engine:** Seamlessly bridges TensorFlow, PyTorch/HuggingFace, and ONNX models.
+* **Result Stabilization:** Uses a statistical buffer (Voting/Averaging) to smooth out prediction flickering.
+* **Granular Color Logic:** Analyzes clothing items in HSV color space to distinguish specific shades (e.g., "Dark Blue" vs "Black").
+* **Interactive GUI:** Built with Tkinter for a responsive, user-friendly experience with a "Scan Mode" workflow.
 
-## Installation & Setup
+##  Architecture
+The system follows a modular "Hub-and-Spoke" architecture:
+1.  **Input:** OpenCV captures video frames.
+2.  **Preprocessing Hub:** Resizes and normalizes crops for specific model requirements (224x224, 299x299, etc.).
+3.  **Inference Engine:**
+    * *ONNX Runtime:* Age & Ethnicity (EfficientNet)
+    * *TensorFlow (Legacy):* Gender (Xception) & Hair (U-Net)
+    * *PyTorch:* Skin Tone (ViT) & Clothing (Object Detection)
+4.  **Stabilizer:** Aggregates the last `N` frames to determine the most probable attribute.
+5.  **Output:** Tkinter Dashboard updates asynchronously to maintain UI responsiveness.
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/yourusername/pattern_recognition_y4.git](https://github.com/yourusername/pattern_recognition_y4.git)
-   cd pattern_recognition_y4
+##  Installation
+
+### Prerequisites
+* Python 3.9 or higher
+* CUDA-capable GPU (Recommended for real-time performance)
+
+### Setup
+1.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/YourUsername/Biometric-Profiler.git](https://github.com/YourUsername/Biometric-Profiler.git)
+    cd Biometric-Profiler
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Model Setup**
+    Ensure the following model files are present in the root directory:
+    * `age_race.onnx`
+    * `gender_recognition_xception_finetuned.keras`
+    * `hair_segmentation_model.h5`
+    * `skin_tone_model.safetensors` (+ `config.json`)
+    * `fashion_model/` (Directory or HuggingFace cache)
+
+##  Usage
+
+Run the main dashboard script:
+
+```bash
+python dashboard.py
